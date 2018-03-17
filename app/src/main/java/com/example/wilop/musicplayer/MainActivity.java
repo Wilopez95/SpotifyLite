@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         soundBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
@@ -126,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 if(SongLoaded){
                     mediaPlayer.stop();
                     timer.cancel();
-                    //SongLetter.setText(" empy");
 
                     Play(view,SongListRaw.get(position), elementos.get(position));
                 }else{
