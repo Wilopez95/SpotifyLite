@@ -18,8 +18,14 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 
@@ -37,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     ListView SongsList;
     ArrayList<String> elementos;
     ArrayList<Integer>  SongListRaw =new  ArrayList<Integer>();
-    //ArrayList<Integer>  TexListRaw =new  ArrayList<Integer>();
     TextView  textView2;
     TextView  textView3;
     TextView SongLetter;
@@ -48,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
     int maxVolumen;
     int CurrentVolumen;
     int tmpDuration;
-    //private static final String texto = "Episode IV A NEW HOPE\n\nIt is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.\n\nDuring the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.\n\nPursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy.....";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +73,13 @@ public class MainActivity extends AppCompatActivity {
         SongListRaw.add(R.raw.besos_en_guerra);
         SongListRaw.add(R.raw.el_farsante);
         //Add letters
-        //TexListRaw.add(R.raw.let_you_downt);
-        //TexListRaw.add(R.raw.casate_conmigot);
-        //TexListRaw.add(R.raw.besos_en_guerrat);
-        //TexListRaw.add(R.raw.el_farsantet);
+
         //
         SongsList.setAdapter(arrayAdapter);
         SongsList = findViewById(R.id.Songslist);
         play = findViewById(R.id.PlayButton);
 
-        //SongLetter.findViewById(R.id.SongLetter);
+        SongLetter = findViewById(R.id.textView);
 
         textView2 = findViewById(R.id.textView2);
         textView3 = findViewById(R.id.textView3);
@@ -85,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         CurrentVolumen = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         volumenBar = findViewById(R.id.Volumenbar);
         volumenBar.setMax(maxVolumen);
+
+
+
+
 
 
 
@@ -118,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
                 if(SongLoaded){
                     mediaPlayer.stop();
                     timer.cancel();
+                    //SongLetter.setText(" empy");
+
                     Play(view,SongListRaw.get(position), elementos.get(position));
                 }else{
                     Play(view,SongListRaw.get(position), elementos.get(position));
@@ -128,6 +138,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void Play(View view,int song, String name) {
+
+
+
+
 
         SongLoaded = true;
         mediaPlayer = MediaPlayer.create(this,song);
@@ -145,11 +159,17 @@ public class MainActivity extends AppCompatActivity {
         textView3.setVisibility(View.VISIBLE);
         textView2.setText(Integer.toString(m)+":"+Integer.toString(s));
         textView2.setVisibility(View.VISIBLE);
+        soundBar.setVisibility(View.VISIBLE);
+
+
+        //SongLetter.setText(texto);
 
 
         //SongLetter
-        //SongLetter.setText(texto);
 
+       setText (name);
+
+        SongLetter.animate().translationYBy(-3000f).setDuration(mediaPlayer.getDuration());
 
         //Set Seekbar max
         soundBar.setMax(mediaPlayer.getDuration()/1000);
@@ -157,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         soundBar.setProgress(0);
 
         //play song
-       mediaPlayer.start();
+        mediaPlayer.start();
 
 
         play.setBackgroundResource(R.drawable.pausa);
@@ -170,6 +190,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setText (String name){
+        BufferedReader reader = null;
+        //StringBuilder ns = null;
+        StringBuilder text = new StringBuilder();
+
+        try {
+            reader = new BufferedReader(
+                    new InputStreamReader(getAssets().open(name+".txt")));
+
+            // do reading, usually loop until end of file reading
+            String mLine;
+            while ((mLine = reader.readLine()) != null) {
+                text.append(mLine);
+                text.append('\n');
+            }
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(),"Error reading file!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    //log the exception
+                }
+            }
+            SongLetter.setText((CharSequence) text);
+
+        }
+    }
 
     public void MoveBar(final int time, final View view){
         timer = new CountDownTimer(time, 1000) {
@@ -198,8 +248,7 @@ public class MainActivity extends AppCompatActivity {
                 play.setBackgroundResource(R.drawable.pausa);
                 playFlag = false;
                 MoveBar(tmpDuration, view);
-
-
+                SongLetter.animate().translationYBy(-3500f).setDuration(tmpDuration);
 
             }else{
                 mediaPlayer.pause();
@@ -208,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
                 playFlag = true;
                 //handler.removeCallbacks(r);
                 timer.cancel();
+                SongLetter.animate().cancel();
 
 
             }

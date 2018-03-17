@@ -33,6 +33,14 @@
                     android:layout_marginTop="15dp"
                     android:visibility="invisible" />
 
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="4086dp"
+                    android:layout_marginBottom="10dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -50,6 +58,7 @@
                         android:layout_width="50dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/back"
@@ -62,6 +71,7 @@
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/play"
 
@@ -73,6 +83,7 @@
                         android:layout_width="50dp"
                         android:layout_height="60dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/next"
@@ -127,7 +138,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="10dp"
-                    android:progress="@android:integer/status_bar_notification_info_maxnum" />
+                    android:progress="@android:integer/status_bar_notification_info_maxnum"
+                    android:visibility="invisible" />
 
 
             </LinearLayout>
