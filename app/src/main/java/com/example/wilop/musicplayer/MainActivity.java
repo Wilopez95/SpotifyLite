@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     ListView SongsList;
     ArrayList<String> elementos;
     ArrayList<Integer>  SongListRaw =new  ArrayList<Integer>();
-    ArrayList<Integer>  TexListRaw =new  ArrayList<Integer>();
+    //ArrayList<Integer>  TexListRaw =new  ArrayList<Integer>();
     TextView  textView2;
     TextView  textView3;
     TextView SongLetter;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     int maxVolumen;
     int CurrentVolumen;
     int tmpDuration;
-    String texto = "Episode IV A NEW HOPE\n\nIt is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.\n\nDuring the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.\n\nPursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy.....";
+    //private static final String texto = "Episode IV A NEW HOPE\n\nIt is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.\n\nDuring the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon, the DEATH STAR, an armored space station with enough power to destroy an entire planet.\n\nPursued by the Empire's sinister agents, Princess Leia races home aboard her starship, custodian of the stolen plans that can save her people and restore freedom to the galaxy.....";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,16 +66,16 @@ public class MainActivity extends AppCompatActivity {
         SongListRaw.add(R.raw.besos_en_guerra);
         SongListRaw.add(R.raw.el_farsante);
         //Add letters
-        TexListRaw.add(R.raw.let_you_downt);
-        TexListRaw.add(R.raw.casate_conmigot);
-        TexListRaw.add(R.raw.besos_en_guerrat);
-        TexListRaw.add(R.raw.el_farsantet);
+        //TexListRaw.add(R.raw.let_you_downt);
+        //TexListRaw.add(R.raw.casate_conmigot);
+        //TexListRaw.add(R.raw.besos_en_guerrat);
+        //TexListRaw.add(R.raw.el_farsantet);
         //
         SongsList.setAdapter(arrayAdapter);
         SongsList = findViewById(R.id.Songslist);
         play = findViewById(R.id.PlayButton);
 
-        SongLetter.findViewById(R.id.SongLetter);
+        //SongLetter.findViewById(R.id.SongLetter);
 
         textView2 = findViewById(R.id.textView2);
         textView3 = findViewById(R.id.textView3);
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //SongLetter
-        SongLetter.setText(texto);
+        //SongLetter.setText(texto);
 
 
         //Set Seekbar max
